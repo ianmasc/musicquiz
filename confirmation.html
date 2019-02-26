@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="mx-auto">
+        <div class="row">
+            <div class="col">
+                <div class="p-3 mb-2 bg-dark text-white">
+                    <h3> Are you sure you want to clear your score? </h2>
+                        <p></p>
+                        <form action = "/">
+                            <button type="radio" class="btn btn-info" name = "choice" value = "Change Genre"> Yes </ br>
+                            </button>
+                            </ br>
+                            <p></p>
+                            <button type="radio" class="btn btn-info" name = "choice" value = "b"> No </ br>
+                            </button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

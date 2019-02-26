@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="p-3 mb-2 bg-info text-white">
+        <div class="col">
+            <div class="row">
+                <h3> {{genreChosen}} </h3>
+            </div>
+            <div class="row">
+                <br />
+                <p><strong> {{mess}} </strong></p>
+                <br />
+            </div>
+            <div class="row">
+                <div class="wrapper">
+                    <div class="canvas-container">
+                        <canvas id="progress" width="500" height="50"></canvas>
+                        <audio id="audio" ontimeupdate="updateBar()" src="{{dictionary}}">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <div class="row">
+                <span id="current-time"></span> /
+                <span id="duration"></span>
+            </div>
+            <p></p>
+            <p></p>
+            <div class="row">
+                <button class="btn btn-secondary" id="audioControl" onclick="togglePlaying()">Play</button>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<p></p>
+<div class="container">
+    <div class="col">
+        <div class="row">
+            <div class="p-3 mb-2 bg-white text-dark">
+                <h5> What's the song? </h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form action = "/answer">
+            <div class="col">
+                {% for song in songs %}
+                    <input type="radio" class="btn btn-outline-primary btn-responsive" data-toggle="button" aria-pressed="false" autocomplete="off" name = "choice" value = "{{song}}"> {{song}} </input>
+                    </br>
+                        {% endfor %}
+                    <br>
+                    <button type="submit" class="btn btn-secondary" value = "Submit" >Submit
+                    </button>
+            </div>
+        </div>
+    </form>
+    </br>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="p-3 mb-2 bg-info text-white">
+                    <form action = "/confirmation">
+                        <p> Would you like to clear your score? </p>
+                        <button type="submit" class="btn btn-secondary" value="Clear Score">Clear Score</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+
+
+<script>
+var canvasWidth = 500
+var audioEl = document.getElementById("audio")
+var canvas = document.getElementById("progress").getContext('2d')
+var ctrl = document.getElementById('audioControl')
+
+audioEl.addEventListener('loadedmetadata', function() {
+  var duration = audioEl.duration
+  var currentTime = audioEl.currentTime
+  document.getElementById("duration").innerHTML = convertElapsedTime(duration)
+  document.getElementById("current-time").innerHTML = convertElapsedTime(currentTime)
+  canvas.fillRect(0, 0, canvasWidth, 50);
+});
+
+function togglePlaying() {
+
+  var play = ctrl.innerHTML === 'Play'
+  var method
+
+  if (play) {
+    ctrl.innerHTML = 'Pause'
+    method = 'play'
+  } else {
+    ctrl.innerHTML = 'Play'
+    method = 'pause'
+  }
+
+  audioEl[method]()
+
+}
+
+function updateBar() {
+  canvas.clearRect(0, 0, canvasWidth, 50)
+  canvas.fillStyle = "#000";
+  canvas.fillRect(0, 0, canvasWidth, 50)
+
+  var currentTime = audioEl.currentTime
+  var duration = audioEl.duration
+
+  if (currentTime === duration) {
+    ctrl.innerHTML = "Play"
+  }
+
+  document.getElementById("current-time").innerHTML = convertElapsedTime(currentTime)
+
+  var percentage = currentTime / duration
+  var progress = (canvasWidth * percentage)
+  canvas.fillStyle = "#0000FF"
+  canvas.fillRect(0, 0, progress, 50)
+}
+
+function convertElapsedTime(inputSeconds) {
+  var seconds = Math.floor(inputSeconds % 60)
+  if (seconds < 10) {
+    seconds = "0" + seconds
+  }
+  var minutes = Math.floor(inputSeconds / 60)
+  return minutes + ":" + seconds
+}
+</script>
+
+{% endblock %}

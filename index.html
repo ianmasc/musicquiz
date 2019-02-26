@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="p-3 mb-2 bg-info text-white">
+        <div class="col">
+            <div class="row">
+                <h3>Choose a genre!</h3>
+            </div>
+            <div class="row">
+                <br />
+                <p></p>
+                <p><strong> {{m}} </strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <form action = "/question">
+    <select name = "genreChosen">
+        {% for genre in genres %}
+        <option value = "{{genre}}" SELECTED>{{genre}}</option>"
+        {% endfor %}
+    </select>
+    <br />
+    <br>
+    <button type="submit" class="btn btn-secondary" value="Play now">Play Now</button>
+    </form>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="p-3 mb-2 bg-info text-white">
+                <form action = "/confirmation">
+                    <p> Would you like to clear your score? </p>
+                    <button type="submit" class="btn btn-secondary" value="Clear Score">Clear Score</button>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="col">
+            <div class="container">
+                <div class="card border-dark">
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Social Media</h5>
+                        <p class="card-text">Share DJ 183 on Facebook and Twitter!</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="fb-share-button" data-href="https://dj183-ctrl-alt-elite.herokuapp.com/" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdj183-ctrl-alt-elite.herokuapp.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="https://twitter.com/intent/tweet?url=https://dj183-ctrl-alt-elite.herokuapp.com/" class="twitter-share-button" data-show-count="false" target=”_blank” data-size="large">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

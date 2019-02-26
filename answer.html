@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<div class="container">
+    <div class="p-3 mb-2 bg-info text-white">
+        <div class="col">
+            <div class="row">
+                <h3> {{genreA}} </h3>
+            </div>
+            <div class="row">
+                <br />
+                <p><strong> {{mess}} </strong></p>
+            </div>
+        </div>
+    </div>
+    <br>
+<div class="row">
+    <div class="col">
+        <div class="p-3 mb-2 bg-secondary text-white">
+            <p><u> Your answer was: {{userAnswer}} </u></p>
+            <p></p>
+            <p><u> The correct answer is: {{answer}} </u></p>
+            <p></p>
+            <p><strong> {{message}} </strong></p>
+        </div>
+    </div>
+</div>
+    <div class="col">
+        <div class="container">
+            <div class="p-3 mb-2 bg-white text-dark">
+                <h5><strong> Music Video for the Correct Song </strong></h5>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{tag}}" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="col-md-auto">
+                    <div class="p-3 mb-2 bg-dark text-white">
+                        <form action = "/question">
+                            <p> Would you like to keep playing? </p>
+                            <button type="submit" class="btn btn-secondary" name = "genreChosen" value = "{{genreA}}" >Keep Playing</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="container">
+                <div class="row-sm">
+                    <div class="col-md-auto">
+                        <div class="p-3 mb-2 bg-dark text-white">
+                            <form action = "/"
+                                <p> Would you like to change your genre and start a new game? </p>
+                                <button type="submit" class="btn btn-secondary" name = "choice" value = "New Game">Change genre</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-105"></div>
+        <div class="col">
+            <div class="container">
+                <div class="row-sm">
+                    <div class="col-md-auto">
+                        <div class="p-3 mb-2 bg-dark text-white">
+                            <form action = "/confirmation">
+                                <p> Would you like to clear your score? </p>
+                                <button type="submit" class="btn btn-secondary" value="Clear Score">Clear Score</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    {% endblock %}
